@@ -6,6 +6,7 @@ import { InputEmail } from '../ui/InputEmail';
 import { InputPassword } from '../ui/inputPassword';
 import { signUpUser } from '@/api/auth';
 import { useNavigate } from 'react-router-dom';
+import { useUserSingUp } from '@/api/hooks';
 
 type TFormValues = {
   email: string;
@@ -25,15 +26,19 @@ export const SignUpForm = () => {
     },
   });
 
+  const { mutate: userSignUp, isPending } = useUserSingUp();
+
   const onSubmit = async (values: TFormValues) => {
-    try {
-      await signUpUser(values);
-      successToast({ title: 'Registration success' });
-      navigate(ROUTES.SIGN_IN);
-    } catch (error: any) {
-      errorToast({ description: error.response.data.message });
-      console.error(error);
-    }
+    userSignUp(values, {
+      onSuccess: () => {
+        successToast({ title: 'Registration success' });
+        navigate(ROUTES.SIGN_IN);
+      },
+      onError: (error: any) => {
+        errorToast({ description: error.response?.data?.message || 'Registration failed' });
+        console.error(error);
+      },
+    });
   };
 
   return (
@@ -73,7 +78,7 @@ export const SignUpForm = () => {
           <Button
             height="50px"
             loadingText="Submitting"
-            isLoading={formState.isSubmitting}
+            isLoading={formState.isSubmitting || isPending}
             type="submit"
             variant="main"
           >

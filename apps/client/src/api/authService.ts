@@ -68,8 +68,6 @@ authService.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response && error.response.status === 401) {
-      console.log('test refresh token', getRefreshToken());
-
       if (getRefreshToken()) {
         const newAccessToken = await refreshAccessToken();
 

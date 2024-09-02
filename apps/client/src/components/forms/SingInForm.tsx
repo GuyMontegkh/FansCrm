@@ -4,9 +4,9 @@ import { Button, Flex, Link, Stack, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { InputEmail } from '../ui/InputEmail';
 import { InputPassword } from '../ui/inputPassword';
-import { useUserLogin } from '@/api/hooks';
 import { loginUser } from '@/api/auth';
 import { useAuth } from '@/context/AuthProvider';
+import { useUserLogin } from '@/api/hooks';
 
 type TFormValues = {
   email: string;
@@ -24,16 +24,19 @@ export const SingInForm = () => {
     },
   });
 
+  const { mutate: userLogin, isPending } = useUserLogin();
+
   const onSubmit = async (values: TFormValues) => {
-    try {
-      const response = await loginUser(values);
-      console.log('response', response);
-      login(response);
-      successToast({ title: 'Logged in successfully' });
-    } catch (error: any) {
-      errorToast({ description: error.response.data.message });
-      console.error(error);
-    }
+    userLogin(values, {
+      onSuccess: (response) => {
+        login(response);
+        successToast({ title: 'Logged in successfully' });
+      },
+      onError: (error: any) => {
+        errorToast({ description: error.response?.data?.message || 'Login failed' });
+        console.error(error);
+      },
+    });
   };
 
   return (
@@ -66,7 +69,7 @@ export const SingInForm = () => {
           <Button
             height="50px"
             loadingText="Submitting"
-            isLoading={formState.isSubmitting}
+            isLoading={formState.isSubmitting || isPending}
             type="submit"
             variant="main"
           >
