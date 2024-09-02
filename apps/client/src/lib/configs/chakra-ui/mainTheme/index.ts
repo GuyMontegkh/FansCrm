@@ -3,9 +3,6 @@ import { DeepPartial, extendTheme, theme, ThemeOverride } from '@chakra-ui/react
 import * as components from './overrides';
 import { colors } from './colors';
 
-// import '@fontsource-variable/open-sans'
-// import '@fontsource-variable/raleway'
-
 const themeConfig: DeepPartial<ThemeOverride> = {
   colors,
   styles: {
@@ -25,8 +22,6 @@ const themeConfig: DeepPartial<ThemeOverride> = {
   fonts: {
     heading: 'var(--font-DM-sans)',
     body: 'var(--font-DM-sans)',
-    // heading: `'Open Sans', sans-serif`,
-    // body: `'Raleway', sans-serif`,
   },
   breakpoints: {
     sm: '375px',

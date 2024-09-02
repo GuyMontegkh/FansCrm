@@ -1,12 +1,12 @@
 import { useAppToast } from '@/hooks/useAppToast';
 import { ROUTES } from '@/lib/routes';
-import { Button, Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { InputEmail } from '../ui/InputEmail';
 import { InputPassword } from '../ui/inputPassword';
-import { loginUser } from '@/api/auth';
 import { useAuth } from '@/context/AuthProvider';
 import { useUserLogin } from '@/api/hooks';
+import { Link } from 'react-router-dom';
 
 type TFormValues = {
   email: string;
@@ -76,14 +76,16 @@ export const SingInForm = () => {
             Sign In
           </Button>
         </Stack>
-        <Stack pt="24px">
+        <Flex pt="24px" gap={1}>
           <Text textAlign={'center'} fontFamily="Proxima-Nova" fontSize="14px" fontWeight={400}>
             Don’t have an account?{' '}
-            <Link href={ROUTES.SIGN_UP} color="blueRibbon">
-              Sign up here
-            </Link>
           </Text>
-        </Stack>
+          <Link to={ROUTES.SIGN_UP}>
+            <Text fontFamily="Proxima-Nova" fontSize="14px" fontWeight={400} color="blueRibbon">
+              Sign up here
+            </Text>
+          </Link>
+        </Flex>
       </form>
     </Flex>
   );

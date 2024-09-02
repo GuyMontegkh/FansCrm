@@ -1,5 +1,5 @@
 import { Button, Flex, Heading, Text } from '@chakra-ui/react';
-import { AuthLayout } from '../components/layouts/AuthLayout';
+import { AuthLayout } from '@/components/layouts/AuthLayout';
 import { ROUTES } from '@/lib/routes';
 import { useNavigate } from 'react-router-dom';
 

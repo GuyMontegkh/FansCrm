@@ -1,7 +1,6 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getCurrentUser, loginUser, signUpUser } from './auth';
 import { QUERY_KEYS } from './queryKeys';
-import { REFRESH_INTERVAL_MS } from '@/lib/constants';
 import { UserDataType } from './types';
 
 export const useUserInfo = ({ id, enabled }: { enabled: boolean; id: number }) =>

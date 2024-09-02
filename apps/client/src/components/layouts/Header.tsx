@@ -6,9 +6,8 @@ export const Header = () => {
   const { logout } = useAuth();
   const location = useLocation();
 
-  // Extract the last part of the URL path for the header text
   const path = location.pathname.split('/').filter(Boolean).pop() || 'Home';
-  const formattedPath = path.charAt(0).toUpperCase() + path.slice(1); // Capitalize the first letter
+  const formattedPath = path.charAt(0).toUpperCase() + path.slice(1);
 
   return (
     <Flex

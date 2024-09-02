@@ -12,7 +12,7 @@ import {
   useMediaQuery,
   Text,
 } from '@chakra-ui/react';
-// import { LockIcon } from '@/assets/icons/LockIcon';
+import { LockIcon } from '@/assets/icons/LockIcon';
 import { EyeIcon } from '@/assets/icons/EyeIcon';
 import { ValidCheckIcon } from '@/assets/icons/ValidCheckIcon';
 import { InvalidWarningIcon } from '@/assets/icons/InvalidWarningIcon';
@@ -99,9 +99,9 @@ export const InputPassword = memo(
     return (
       <FormControl isInvalid={!!error}>
         <InputGroup alignItems="center">
-          {/* <InputLeftElement pointerEvents="none" px="10px" left="14px" top="7px">
+          <InputLeftElement pointerEvents="none" px="10px" left="14px" top="7px">
             <LockIcon color={'nobel'} />
-          </InputLeftElement> */}
+          </InputLeftElement>
           <Input
             {...register(name, validation)}
             id={name}
